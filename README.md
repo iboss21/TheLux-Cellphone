@@ -1,69 +1,64 @@
-# Z-Phone
+# TheLux-Cellphone
 
-Welcome to **Z-Phone**, the open-source initiative that transforms the in-game mobile experience in FiveM by introducing a sleek, iPhone-inspired design that prioritizes simplicity and elegance.
+Welcome to **TheLux-Cellphone**, an open-source initiative designed to enhance the in-game mobile experience in FiveM. Drawing inspiration from an iPhone-style aesthetic, TheLux-Cellphone offers a sleek, elegant, and straightforward interface.
 
 ## Objective
 
-Our goal is to create a visually appealing and user-friendly phone interface that enhances the gameplay experience without overwhelming players. By focusing on essential features and an intuitive layout, we hope to make communication in the game more enjoyable and immersive.
+Our primary goal is to deliver a visually appealing and user-friendly phone interface that enriches the gameplay experience without overwhelming players. By focusing on essential features and intuitive navigation, we aim to make in-game communication more enjoyable, immersive, and easy to use.
 
 ## Inspiration
 
-This project is inspired by **QBPhone** from **QBCore**, combining its core functionalities with a fresh aesthetic that appeals to modern users. Our redesign aims to modernize the user experience while retaining the familiar features players love.
+This project takes cues from **QBPhone** (part of the **QBCore** framework), merging its foundational functionalities with a fresh, modern look. We strive to improve the user experience while retaining the familiar features that players know and love.
 
 ## Dependencies
-for QB
-- **[QB Core](https://github.com/qbcore-framework/qb-core "QB Core")**: This project relies on the QBCore framework for core functionalities.
-- **[QB Banking](https://github.com/qbcore-framework/qb-banking "QB Banking")**: QB Banking is need for digital banking app or invoices.
 
-for ESX
-- **[ESX Core](https://github.com/esx-framework/esx_core "ESX Core")**: This project relies on the ESX framework for core functionalities.
-- **[ESX Banking](https://github.com/esx-framework/esx_banking "ESX Banking")**: ESX Banking is need for digital banking app.
-- **[ESX Billing](https://github.com/esx-framework/esx_billing "ESX Billing")**: ESX Banking is need for billing on banking app.
+### For QB:
+- **[QB Core](https://github.com/qbcore-framework/qb-core "QB Core")**: Core framework functionalities.
+- **[QB Banking](https://github.com/qbcore-framework/qb-banking "QB Banking")**: Required for the digital banking and invoicing app.
 
-for QBX
-    TODO updates documentation
+### For ESX:
+- **[ESX Core](https://github.com/esx-framework/esx_core "ESX Core")**: Core framework functionalities.
+- **[ESX Banking](https://github.com/esx-framework/esx_banking "ESX Banking")**: Required for digital banking features.
+- **[ESX Billing](https://github.com/esx-framework/esx_billing "ESX Billing")**: Required for billing functionality within the banking app.
 
-for OX (inprogress)
+### For QBX:
+- *Documentation updates forthcoming.*
 
-**IMPORTANT**: If you use others **garage, housing, banking and invoice resource** you still can use this phone but need a little changes on **server/core/[your fw].lua** then update query for retrieving datas following structure, please dont change the structure if you dont want enter to .jsx code!
+### For OX (in progress):
+- *Integration work in progress.*
 
-always need
-- **[OX Lib](https://github.com/overextended/ox_lib "OX Lib")**: OX Lib is also required to ensure seamless integration with existing systems.
+**Important**: If you use alternative garage, housing, banking, or invoicing resources, you can still utilize TheLux-Cellphone with some adjustments. Update the queries in **server/core/[your fw].lua** to match the required data structure. Please refrain from altering the established structure unless you plan to modify the associated .jsx code.
+
+**Always Required**:  
+- **[OX Lib](https://github.com/overextended/ox_lib "OX Lib")**: Ensures seamless integration and compatibility with existing systems.
 
 ## Tech Stack
 
-We are using the following technologies to build this project:
-
-- **React.js**: For creating a dynamic and responsive user interface.
-- **Tailwind CSS**: To style our components with a utility-first approach, ensuring a clean and modern design.
+- **React.js**: Powers the dynamic, responsive user interface.
+- **Tailwind CSS**: Provides a utility-first approach for crafting a clean, modern design.
 
 ## Contributing
 
-We welcome contributions from the community! Feel free to open issues, submit pull requests, or suggest features. Together, we can make the Z-Phone experience better for everyone.
+We welcome community involvement! Whether you have issues to report, pull requests to submit, or feature suggestions to share, your contributions are highly encouraged. Let’s work together to continually improve the TheLux-Cellphone experience.
 
 ## License
 
-This project is licensed under the DWYWDBM License - see the [LICENSE](https://github.com/alfaben12/z-phone/blob/main/LICENSE) file for details.
-
----
-
-Thank you for checking out Z-Phone! We hope you enjoy the new experience as much as we enjoyed creating it.
+This project is licensed under the DWYWDBM License. For full details, see the [LICENSE](https://github.com/alfaben12/z-phone/blob/main/LICENSE) file. *(Replace URL with TheLux-Cellphone’s repository if necessary.)*
 
 ---
 
 ## Ready to Use???
 
-#### (Optional for QB) **BANK TRANSACTION**
+### (Optional for QB) Bank Transactions
 
-If you want all bank transactions recorded, then do it
-in **qb-core/server/player.lua**
+To record all bank transactions, edit **qb-core/server/player.lua**:
 
-**function self.Functions.AddMoney**
+**In `self.Functions.AddMoney`**:
 
 ```lua
--- OTHERS CODE
+-- OTHER CODE
 if not self.Offline then
-    -- OTHERS CODE
+    -- OTHER CODE
     if moneytype == 'bank' then
         MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
             self.PlayerData.citizenid,
@@ -73,17 +68,17 @@ if not self.Offline then
             'deposit'
         })
     end
-    -- OTHERS CODE
+    -- OTHER CODE
 end
 ```
 
-**self.Functions.RemoveMoney**
+**In `self.Functions.RemoveMoney`**:
 
 ```lua
--- OTHERS CODE
+-- OTHER CODE
 if not self.Offline then
-    -- OTHERS CODE
-   if moneytype == 'bank' then
+    -- OTHER CODE
+    if moneytype == 'bank' then
         MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
             self.PlayerData.citizenid,
             'checking',
@@ -93,54 +88,212 @@ if not self.Offline then
         })
         TriggerClientEvent('qb-phone:client:RemoveBankMoney', self.PlayerData.source, amount)
     end
-    -- OTHERS CODE
+    -- OTHER CODE
 end
 ```
 
-#### (Required) **IMPORT SOUND**
+### (Required) Import Sounds
 
-Go to https://github.com/alfaben12/z-phone/tree/main/html/sounds copy all files then paste to resources/[standalone]/interact-sound/client/html/sounds
+Visit the corresponding repository (previously [this link](https://github.com/alfaben12/z-phone/tree/main/html/sounds)) and copy all sound files. Paste them into `resources/[standalone]/interact-sound/client/html/sounds`.
 
-#### (Required) **IMPORT DATABASE**
+### (Required) Import Database
 
-Go to https://github.com/alfaben12/z-phone/blob/main/z-phone.sql import query to your database to add all table for support z-phone
+Import the SQL file from the repository (previously [z-phone.sql](https://github.com/alfaben12/z-phone/blob/main/z-phone.sql)) into your database. This adds all necessary tables to support TheLux-Cellphone.
 
-## IMPORTANT NOTES
+## Important Notes
 
-Default phone number in QBCore may not be compatible with z-phone. If you use QBCore.Functions.GetPlayerByPhone(number) with a z-phone number, it is likely to return incorrect results. To avoid this issue, it's essential to synchronize the z-phone numbers with the QBCore character information (on table players, column charinfo, key phone).
+The default phone number system in QBCore may not be compatible with TheLux-Cellphone. Using `QBCore.Functions.GetPlayerByPhone(number)` with a TheLux-Cellphone number may yield incorrect results. To prevent this, ensure TheLux-Cellphone numbers are synchronized with QBCore character data (in the `charinfo` column of the `players` table, under `phone`).
 
-## BTW
+## Additional Information
 
-I forgot where I downloaded this iPhone object, as far as I remember I downloaded it from forum.cfx.re, remind me if you know the author.
+The original iPhone object used as a reference was sourced from forum.cfx.re, though the exact author is currently unknown. If you recognize it, please let us know!
 
-Please note that in V2.x.x, z-phone has not been optimized. If you want it optimized, that's fine and don't forget to make a pull request.
+TheLux-Cellphone v2.x.x has not yet been optimized. If you’re interested in optimizing it, feel free to do so and submit a pull request.
 
-## DISCUSSION
+## Discussion
 
-https://discord.com/channels/1012753553418354748/1289265300457525269/1289265300457525269
+Join the conversation on [Discord](https://discord.com/channels/1012753553418354748/1289265300457525269/1289265300457525269).
 
 ## Showcase
 
-[https://www.youtube.com/watch?v=sE6SahWlA3U](https://www.youtube.com/watch?v=sE6SahWlA3U)
+Check out our [YouTube demo](https://www.youtube.com/watch?v=sE6SahWlA3U).
 
-## SUPPORT
+## Support
 
-Thank you for your support! [ko-fi](https://ko-fi.com/alfaben)
+Your support is appreciated! Consider contributing via [Ko-fi](https://ko-fi.com/alfaben).
 
-## All Thanks to Our Contributors
+## Acknowledgments
+
+**Thanks to all our contributors:**
 
 <table>
    <tbody>
       <tr>
          <td align="center" valign="top">
             <a href="https://github.com/alfaben12"
-                style="text-decoration: none;"
-               ><img
-               src="https://avatars.githubusercontent.com/u/20008086?v=4"
-               width="50px"
-               alt="Thariq Alfa"
-               /><br /><sub><b>alfaben12</b></sub></a>
+               style="text-decoration: none;">
+               <img
+                  src="https://avatars.githubusercontent.com/u/20008086?v=4"
+                  width="50px"
+                  alt="Thariq Alfa"
+               /><br />
+               <sub><b>alfaben12</b></sub></a>
          </td>
       </tr>
    </tbody>
 </table>
+
+---
+
+Thank you for checking out TheLux-Cellphone! We hope you enjoy the enhanced in-game mobile experience as much as we enjoyed creating it.Below is the rewritten version with the project name changed to **TheLux-Cellphone**:
+
+---
+
+# TheLux-Cellphone
+
+Welcome to **TheLux-Cellphone**, an open-source initiative designed to enhance the in-game mobile experience in FiveM. Drawing inspiration from an iPhone-style aesthetic, TheLux-Cellphone offers a sleek, elegant, and straightforward interface.
+
+## Objective
+
+Our primary goal is to deliver a visually appealing and user-friendly phone interface that enriches the gameplay experience without overwhelming players. By focusing on essential features and intuitive navigation, we aim to make in-game communication more enjoyable, immersive, and easy to use.
+
+## Inspiration
+
+This project takes cues from **QBPhone** (part of the **QBCore** framework), merging its foundational functionalities with a fresh, modern look. We strive to improve the user experience while retaining the familiar features that players know and love.
+
+## Dependencies
+
+### For QB:
+- **[QB Core](https://github.com/qbcore-framework/qb-core "QB Core")**: Core framework functionalities.
+- **[QB Banking](https://github.com/qbcore-framework/qb-banking "QB Banking")**: Required for the digital banking and invoicing app.
+
+### For ESX:
+- **[ESX Core](https://github.com/esx-framework/esx_core "ESX Core")**: Core framework functionalities.
+- **[ESX Banking](https://github.com/esx-framework/esx_banking "ESX Banking")**: Required for digital banking features.
+- **[ESX Billing](https://github.com/esx-framework/esx_billing "ESX Billing")**: Required for billing functionality within the banking app.
+
+### For QBX:
+- *Documentation updates forthcoming.*
+
+### For OX (in progress):
+- *Integration work in progress.*
+
+**Important**: If you use alternative garage, housing, banking, or invoicing resources, you can still utilize TheLux-Cellphone with some adjustments. Update the queries in **server/core/[your fw].lua** to match the required data structure. Please refrain from altering the established structure unless you plan to modify the associated .jsx code.
+
+**Always Required**:  
+- **[OX Lib](https://github.com/overextended/ox_lib "OX Lib")**: Ensures seamless integration and compatibility with existing systems.
+
+## Tech Stack
+
+- **React.js**: Powers the dynamic, responsive user interface.
+- **Tailwind CSS**: Provides a utility-first approach for crafting a clean, modern design.
+
+## Contributing
+
+We welcome community involvement! Whether you have issues to report, pull requests to submit, or feature suggestions to share, your contributions are highly encouraged. Let’s work together to continually improve the TheLux-Cellphone experience.
+
+## License
+
+This project is licensed under the DWYWDBM License. For full details, see the [LICENSE](https://github.com/alfaben12/z-phone/blob/main/LICENSE) file. *(Replace URL with TheLux-Cellphone’s repository if necessary.)*
+
+---
+
+## Ready to Use???
+
+### (Optional for QB) Bank Transactions
+
+To record all bank transactions, edit **qb-core/server/player.lua**:
+
+**In `self.Functions.AddMoney`**:
+
+```lua
+-- OTHER CODE
+if not self.Offline then
+    -- OTHER CODE
+    if moneytype == 'bank' then
+        MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
+            self.PlayerData.citizenid,
+            'checking',
+            amount,
+            reason,
+            'deposit'
+        })
+    end
+    -- OTHER CODE
+end
+```
+
+**In `self.Functions.RemoveMoney`**:
+
+```lua
+-- OTHER CODE
+if not self.Offline then
+    -- OTHER CODE
+    if moneytype == 'bank' then
+        MySQL.Async.insert('INSERT INTO bank_statements (citizenid, account_name, amount, reason, statement_type) VALUES (?, ?, ?, ?, ?)', {
+            self.PlayerData.citizenid,
+            'checking',
+            amount,
+            reason,
+            'withdraw'
+        })
+        TriggerClientEvent('qb-phone:client:RemoveBankMoney', self.PlayerData.source, amount)
+    end
+    -- OTHER CODE
+end
+```
+
+### (Required) Import Sounds
+
+Visit the corresponding repository (previously [this link](https://github.com/alfaben12/z-phone/tree/main/html/sounds)) and copy all sound files. Paste them into `resources/[standalone]/interact-sound/client/html/sounds`.
+
+### (Required) Import Database
+
+Import the SQL file from the repository (previously [z-phone.sql](https://github.com/alfaben12/z-phone/blob/main/z-phone.sql)) into your database. This adds all necessary tables to support TheLux-Cellphone.
+
+## Important Notes
+
+The default phone number system in QBCore may not be compatible with TheLux-Cellphone. Using `QBCore.Functions.GetPlayerByPhone(number)` with a TheLux-Cellphone number may yield incorrect results. To prevent this, ensure TheLux-Cellphone numbers are synchronized with QBCore character data (in the `charinfo` column of the `players` table, under `phone`).
+
+## Additional Information
+
+The original iPhone object used as a reference was sourced from forum.cfx.re, though the exact author is currently unknown. If you recognize it, please let us know!
+
+TheLux-Cellphone v2.x.x has not yet been optimized. If you’re interested in optimizing it, feel free to do so and submit a pull request.
+
+## Discussion
+
+Join the conversation on [Discord](https://discord.com/channels/1012753553418354748/1289265300457525269/1289265300457525269).
+
+## Showcase
+
+Check out our [YouTube demo](https://www.youtube.com/watch?v=sE6SahWlA3U).
+
+## Support
+
+Your support is appreciated! Consider contributing via [Ko-fi](https://ko-fi.com/alfaben).
+
+## Acknowledgments
+
+**Thanks to all our contributors:**
+
+<table>
+   <tbody>
+      <tr>
+         <td align="center" valign="top">
+            <a href="https://github.com/alfaben12"
+               style="text-decoration: none;">
+               <img
+                  src="https://avatars.githubusercontent.com/u/20008086?v=4"
+                  width="50px"
+                  alt="Thariq Alfa"
+               /><br />
+               <sub><b>alfaben12</b></sub></a>
+         </td>
+      </tr>
+   </tbody>
+</table>
+
+---
+
+Thank you for checking out TheLux-Cellphone! We hope you enjoy the enhanced in-game mobile experience as much as we enjoyed creating it.
